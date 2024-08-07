@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "cyberos"
+version = "0.1.0"
+description = "AI-NATIVE OS"
+authors = ["ZhouYimao <731901968@sjtu.edu.cn>"]
+license = "GPL"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+langchain-openai = "^0.1.20"
+python-dotenv = "^1.0.1"
+aiosqlite = "^0.20.0"
+langgraph = "^0.2.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
