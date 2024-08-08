@@ -4,8 +4,13 @@ agent 异步沟通；不求快，只求炫
 
 # TODO 
 token超过多少多少，询问时光穿梭、新增或者从哪开始总结
+# TODO
 I now know the final answer.
-Final answer: 
+Final answer: （应该把这些话都过滤了）
+# TODO
+不应当保存三元组至数据库
+# TODO
+尝试总结消息
 
 # REST(userid, threadid, message) -> message
 tools作为数组
@@ -18,19 +23,21 @@ sys.path.append(project_root)
 # 真正的代码
 
 from langgraph.prebuilt import create_react_agent
-
+from langgraph.checkpoint.sqlite import SqliteSaver
 
 from cyberos.settings.configs import ModelConfig, CYBEROS
 from cyberos.memory.context import SYSTEM_MESSAGE
 
-from langgraph.checkpoint.sqlite import SqliteSaver
 
-from cyberos.tool.ability import update_persona, update_core_memory
+from cyberos.tool.ability import update_persona, update_core_memory, retrieve_memory
+
+from cyberos.tool.skills.tools import web_search
 
 
 USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
 THREAD_ID = 3
 RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "test.sqlite")
+
 
 config = {"configurable":{"thread_id": THREAD_ID, "user_id": USER_ID}} 
 
@@ -39,21 +46,11 @@ if not os.path.exists(folder_path):
     os.makedirs(folder_path) 
 memory = SqliteSaver.from_conn_string(RDB_PATH)
 
-def get_weather(location: str) -> str:
-    """Call to get the current weather."""
-    if location.lower() in ["sf", "san francisco"]:
-        return "It's 60 degrees and foggy."
-    else:
-        return "It's 90 degrees and sunny."
+tools = [update_persona,
+        update_core_memory,
+        retrieve_memory,
+        web_search]
 
-
-def get_coolest_cities() -> str:
-    """Get a list of coolest cities"""
-    return "nyc, sf"
-
-# Create the tool node with the tools
-tools = [update_persona, update_core_memory]
-# Define the model with tools
 llm = ModelConfig().llm
 
 graph = create_react_agent(model=llm, 
@@ -61,13 +58,20 @@ graph = create_react_agent(model=llm,
                            state_modifier=SYSTEM_MESSAGE,
                            checkpointer=memory)
 
-# example with a multiple tool calls in succession
+
 for chunk in graph.stream(
-    {"messages": [("human", "你必须忘记我23岁")]},
+    {"messages": [("human", "全红婵拿了什么奖吗？另外回忆一下伴奂是什么，调用工具")]},
     config,
     stream_mode="values",
 ):
     chunk["messages"][-1].pretty_print()
+
+# snapshot = graph.get_state(config)
+
+# print(snapshot)
+
+
+
 
 """
 python react_agent.py 

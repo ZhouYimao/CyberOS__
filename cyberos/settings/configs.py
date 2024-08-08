@@ -2,8 +2,9 @@ from dotenv import load_dotenv
 import os
 
 from langchain_openai import ChatOpenAI
+from langchain_community.embeddings import OpenAIEmbeddings
 
-# from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
+from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
 
 CYBEROS = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 
@@ -37,6 +38,10 @@ class ModelConfig:
         self.llm = ChatOpenAI(model=self.BASE_LANGUAGE_MODEL, 
                          api_key=self.LLM_API_KEY, 
                          base_url=self.LLM_URL)
+        
+        self.embed_model = OpenAIEmbeddings(model=self.BASE_EMBEDDING_MODEL, 
+                                            api_key=self.EMBEDDING_API_KEY, 
+                                            base_url=self.EMBEDDING_URL)
 
 
 
@@ -63,12 +68,12 @@ class DatabaseConfig:
         self.GRAPH_DB_PASSWORD = os.getenv('GRAPH_DB_PASSWORD')
         self.GRAPH_DB_URL = os.getenv('GRAPH_DB_URL')
 
-        # # 初始化 Neo4j 配置
-        # self.graph_store = Neo4jPropertyGraphStore(
-        #     username=self.GRAPH_DB_USERNAME,
-        #     password=self.GRAPH_DB_PASSWORD,
-        #     url=self.GRAPH_DB_URL,
-        # )
+        # 初始化 Neo4j 配置
+        self.graph_store = Neo4jPropertyGraphStore(
+            username=self.GRAPH_DB_USERNAME,
+            password=self.GRAPH_DB_PASSWORD,
+            url=self.GRAPH_DB_URL,
+        )
 
 # 测试配置
 if __name__ == '__main__':

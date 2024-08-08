@@ -24,6 +24,8 @@ from langgraph.graph.message import add_messages
 from langgraph.checkpoint.sqlite import SqliteSaver
 from cyberos.settings.configs import ModelConfig, CYBEROS
 
+# from cyberos.storage.graph_db import graphlize_messages
+
 
 USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
 THREAD_ID = 2
@@ -72,6 +74,27 @@ if __name__ == "__main__":
 
     snapshot = graph.get_state(config)
     print(snapshot)
+
+    # def save_messages(state: State):
+    #     messages = state["messages"]
+    #     messages_dict = []
+        
+    #     # 过滤并提取用户和助手的消息
+    #     filtered_messages = [msg for msg in messages if msg.type not in ["system", "tool"]]
+
+    #     for msg in filtered_messages:
+    #         role = "user" if msg.type == "user" else "assistant"
+    #         content = msg.content
+            
+    #         # 添加到字典列表
+    #         messages_dict.append({
+    #             "role": role,
+    #             "content": content
+    #         })
+        
+    #     # 将处理好的消息传递给 graphlize_messages 函数
+    #     graphlize_messages(messages_dict)
+
     """
     StateSnapshot(
     values={

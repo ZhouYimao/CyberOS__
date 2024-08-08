@@ -8,6 +8,9 @@ import json
 from typing import Dict
 from cyberos.settings.configs import CYBEROS
 
+from cyberos.storage.graph_db import retrieve
+
+
 USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
 CONFIG = os.path.join(CYBEROS, 'data', USER_ID, 'config.json')
 
@@ -69,19 +72,19 @@ def update_core_memory(info: str) -> str:
 
     return "更新完毕"
 
-# def retrieve_memory(question: str) -> str:
-#     """
-#     回忆历史对话，
-#     如果当前对话需要结合过往记忆、缺失上下文时。
-#     或者个性化聊到个性化的内容时，调用该工具从聊天记录中检索过往记忆；
-#     比如用户问：我明天需要吃什么、你觉得谁来做市场比较合适。
-#     请记住，这些仅仅基于图数据库检索的聊天记录总结，其中不一定含有你想要的答案。
+def retrieve_memory(question: str) -> str:
+    """
+    回忆历史对话，
+    如果当前对话需要结合过往记忆、缺失上下文时。
+    或者个性化聊到个性化的内容时，调用该工具从聊天记录中检索过往记忆；
+    比如用户问：我明天需要吃什么、你觉得谁来做市场比较合适。
+    请记住，这些仅仅基于图数据库检索的聊天记录总结，其中不一定含有你想要的答案。
 
-#     :param question: 需要检索的问题
-#     :type question: str
+    :param question: 需要检索的问题
+    :type question: str
 
-#     :return: 与该问题最相关的一些三元组和对话记录
-#     :rtype: str
-#     """
+    :return: 与该问题最相关的一些三元组和对话记录
+    :rtype: str
+    """
 
-#     return retrieve(question)
+    return retrieve(question)
