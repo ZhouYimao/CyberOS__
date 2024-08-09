@@ -6,6 +6,9 @@ sys.path.append(project_root)
 
 import json
 from typing import Dict
+
+from datetime import datetime
+
 from cyberos.settings.configs import CYBEROS
 
 from cyberos.storage.graph_db import retrieve
@@ -13,11 +16,12 @@ from cyberos.storage.graph_db import retrieve
 
 USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
 CONFIG = os.path.join(CYBEROS, 'data', USER_ID, 'config.json')
+TODO = os.path.join(CYBEROS, 'data', USER_ID, 'todo.json')
 
 def update_persona(persona: str) -> str:
     """
     当用户明确需要你修改人设时，调用此函数
-    :param persona: 修改的人设内容(必须是全文)
+    :param persona: 更新后的人设，必须是全文
     :type persona: str
     示例:
         update_persona("我是名侦探柯南，我喜欢解谜，我是一个聪明的人")
@@ -47,7 +51,7 @@ def update_core_memory(info: str) -> str:
 
     示例:
         update_core_memory("姓名: 格蕾修, 年龄: 12, 性别: 女")
-        update_core_memory("生日: 2012-12-21, 联系方式: 19198101145, 职业: 学生")
+        update_core_memory("生日: 2012-12-21, 电话: 19198101145, 职业: 学生")
     """
     with open(CONFIG, "r", encoding="utf-8") as fr:
         config_data = json.load(fr)
@@ -88,3 +92,70 @@ def retrieve_memory(question: str) -> str:
     """
 
     return retrieve(question)
+
+"""
+2、replan很重要，挂起todo 的时候每一步都可能要replan，其实就是检查那些小步骤有没有要增、改、删的
+（multiagent管理上下文；进入任务状态的时候，开一个agent来通信）
+"""
+
+def get_current_timestamp():
+    return int(datetime.now().timestamp())
+
+def update_task(task: str = None, trigger: str = None, completed: bool = False, plan: bool = None) -> str:
+    """
+    更新或添加任务到todo.json文件中。task和trigger用utf-8，基本是中文或者英文
+    :param task: 任务名称（隐含主语是你，例如用户提到明晚看电影，任务名称应当是提醒用户明晚看电影）
+    :param trigger: 触发条件
+    :param completed: 任务完成True，未完成False    
+    :param plan: 是否需要进一步的规划拆解成子任务,True or False
+    :return: 更新状态信息
+
+
+    示例:
+        update_task(task="协同设计用户界面",trigger="和帅哲见面后",completed=False, plan=True)
+        update_task(task="协同设计用户界面",trigger="和帅哲见面前",completed=False, plan=True)
+        update_task(task="协同设计用户界面",tirgger=None,completed=True,Plan=False)
+        update_task(task="提醒周溢茂开会",trigger="周溢茂回家后",completed=False,plan=False)
+    """
+
+    # 处理文件为空或不存在的情况
+    if not os.path.exists(TODO) or os.stat(TODO).st_size == 0:
+        todo_data = []
+    else:
+        with open(TODO, "r", encoding="utf-8") as fr:
+            try:
+                todo_data = json.load(fr)
+            except json.JSONDecodeError:
+                return "todo.json 文件格式错误或为空，无法解析。"
+
+    task_found = False
+
+    for item in todo_data:
+        if task and item['task'] == task:
+            task_found = True
+            if trigger:
+                item['trigger'] = trigger
+            if completed is not None:
+                item['completed'] = completed
+            break
+    
+    if not task_found and task and trigger:
+        new_task = {
+            "task": task,
+            "trigger": trigger,
+            "completed": False,
+            "createdat": get_current_timestamp(),
+            "subtasks": []
+        }
+        todo_data.append(new_task)
+
+    with open(TODO, "w", encoding="utf-8") as fw:
+        json.dump(todo_data, fw, ensure_ascii=False, indent=4)
+
+    return "任务已更新" if task_found else "新任务已添加"
+
+# 示例使用
+# print(update_task(task="设计用户界面",trigger="和帅哲见面后"))
+# print(update_task(task="设计用户界面",trigger="和帅哲见面前"))
+# print(update_task(task="设计用户界面",completed=True))
+# print(update_task(task="设计后端",trigger="八月三号之后"))

@@ -39,9 +39,18 @@ class ModelConfig:
                          api_key=self.LLM_API_KEY, 
                          base_url=self.LLM_URL)
         
+        self.stepfun = ChatOpenAI(model="step-1-32k",
+                                  api_key="7vXrtOZIC0uLPGZGMtvQzX1HEgrZude0i75sAtLjMe86wznqEEOKn4puI1YaBRkLx",
+                                  base_url="https://api.stepfun.com/v1")
+        
+        self.gpt = ChatOpenAI(model="gpt-4o-mini",
+                              api_key="sk-proj-zTCcNQY0hNjiv3lfNVuwT3BlbkFJZTIqWzRfS1bKsg1kNDvr")
+        
+        
         self.embed_model = OpenAIEmbeddings(model=self.BASE_EMBEDDING_MODEL, 
                                             api_key=self.EMBEDDING_API_KEY, 
                                             base_url=self.EMBEDDING_URL)
+        
 
 
 

@@ -1,0 +1,98 @@
+[
+    {
+        "task": "设计用户界面",
+        "trigger": "进入界面设计阶段",
+        "completed": false,
+        "createdat": "2024-08-08T10:30:00Z",
+        "subtasks": [
+            {
+                "subtaskname": "创建线框图",
+                "sequence": "A1",
+                "completed": true,
+                "reminder": null
+            },
+            {
+                "subtaskname": "审查线框图",
+                "sequence": "B1",
+                "completed": false,
+                "reminder": null
+            },
+            {
+                "subtaskname": "进行修改",
+                "sequence": "B2",
+                "completed": false,
+                "reminder": null
+            },
+            {
+                "subtaskname": "最终设计定稿",
+                "sequence": "C1",
+                "completed": false,
+                "reminder": "2024-08-10T09:00:00Z"
+            }
+        ]
+    },
+    {
+        "task": "开发后端api",
+        "trigger": "进入后端开发阶段",
+        "completed": false,
+        "createdat": "2024-08-08T11:00:00Z",
+        "subtasks": [
+            {
+                "subtaskname": "调用<web_search>设置数据库",
+                "sequence": "A1",
+                "completed": true,
+                "reminder": null
+            },
+            {
+                "subtaskname": "创建api端点",
+                "sequence": "B1",
+                "completed": false,
+                "reminder": "2024-08-09T14:00:00Z"
+            },
+            {
+                "subtaskname": "编写单元测试",
+                "sequence": "B2",
+                "completed": false,
+                "reminder": null
+            },
+            {
+                "subtaskname": "与前端集成",
+                "sequence": "C1",
+                "completed": false,
+                "reminder": null
+            }
+        ]
+    },
+    {
+        "task": "进行用户测试",
+        "trigger": "进入测试阶段",
+        "completed": false,
+        "createdat": "2024-08-08T12:00:00Z",
+        "subtasks": [
+            {
+                "subtaskname": "准备测试用例",
+                "sequence": "A1",
+                "completed": false,
+                "reminder": null
+            },
+            {
+                "subtaskname": "执行用户测试",
+                "sequence": "B1",
+                "completed": false,
+                "reminder": "2024-08-12T10:00:00Z"
+            },
+            {
+                "subtaskname": "分析测试结果",
+                "sequence": "B2",
+                "completed": false,
+                "reminder": null
+            },
+            {
+                "subtaskname": "报告测试发现",
+                "sequence": "C1",
+                "completed": false,
+                "reminder": null
+            }
+        ]
+    }
+]

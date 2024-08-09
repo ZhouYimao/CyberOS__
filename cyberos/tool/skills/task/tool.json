@@ -1,0 +1,18 @@
+[
+    {
+        "name": "search",
+        "description": "搜索网络"
+    },
+    {
+        "name": "brainstorm",
+        "description": "和用户一起头脑风暴"
+    },
+    {
+        "name": "association",
+        "description": "基于图和全局空间的联想，拆解问题，利用向量相似度在图上发散，启发新的思路。被动触发，不定时进行联想发散。"
+    },
+    {
+        "name": "decision_assist",
+        "description": "辅助决策，提供分析和推理支持，包括传统CS50AI的定性定量研究方法。帮助用户在关键时刻做出更明智的选择。"
+    }
+]
