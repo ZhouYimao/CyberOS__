@@ -8,7 +8,9 @@ from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
 
 CYBEROS = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..'))
 
+USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
 # 单例模式用于模型配置
+
 class ModelConfig:
     _instance = None
 

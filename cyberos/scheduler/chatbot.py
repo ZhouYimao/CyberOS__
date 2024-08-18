@@ -8,6 +8,7 @@ token超过多少多少，询问时光穿梭、新增或者从哪开始总结
 # REST(userid, threadid, message) -> message
 
 """
+
 import sys
 import os
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
@@ -21,21 +22,25 @@ from typing_extensions import TypedDict
 from langgraph.graph import StateGraph
 from langgraph.graph.message import add_messages
 
+import sqlite3
+
 from langgraph.checkpoint.sqlite import SqliteSaver
-from cyberos.settings.configs import ModelConfig, CYBEROS
+from cyberos.settings.configs import ModelConfig, CYBEROS, USER_ID
 
 # from cyberos.storage.graph_db import graphlize_messages
 
 
-USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
-THREAD_ID = 2
-RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "test.sqlite")
+
+THREAD_ID = 5
+RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "tes.sqlite")
 
 config = {"configurable":{"thread_id": THREAD_ID, "user_id": USER_ID}} 
 folder_path = os.path.dirname(RDB_PATH)
 if not os.path.exists(folder_path):
     os.makedirs(folder_path) 
-memory = SqliteSaver.from_conn_string(RDB_PATH)
+
+memory = SqliteSaver(sqlite3.connect(RDB_PATH, check_same_thread=False))
+# memory = SqliteSaver.from_conn_string(RDB_PATH)
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -66,14 +71,14 @@ if __name__ == "__main__":
     #         for value in event.values():
     #             print("Assistant:", value["messages"][-1].content)
 
-    # user_input = "你知道周杰伦的彩虹吗"
-    # events = graph.stream({"messages": [("user", user_input)]}, config, stream_mode="values")
-    # for event in events:
-    #     if "messages" in event:
-    #         event["messages"][-1].pretty_print()
+    user_input = "我刚问了你什么"
+    events = graph.stream({"messages": [("user", user_input)]}, config, stream_mode="values")
+    for event in events:
+        if "messages" in event:
+            event["messages"][-1].pretty_print()
 
-    snapshot = graph.get_state(config)
-    print(snapshot)
+    # snapshot = graph.get_state(config)
+    # print(snapshot)
 
     # def save_messages(state: State):
     #     messages = state["messages"]

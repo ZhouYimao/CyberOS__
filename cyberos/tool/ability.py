@@ -9,12 +9,12 @@ from typing import Dict
 
 from datetime import datetime
 
-from cyberos.settings.configs import CYBEROS
+from cyberos.settings.configs import CYBEROS, USER_ID
 
 from cyberos.storage.graph_db import retrieve
 
 
-USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
+
 CONFIG = os.path.join(CYBEROS, 'data', USER_ID, 'config.json')
 TODO = os.path.join(CYBEROS, 'data', USER_ID, 'todo.json')
 
@@ -99,25 +99,31 @@ def retrieve_memory(question: str) -> str:
 """
 
 def get_current_timestamp():
-    return int(datetime.now().timestamp())
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-def update_task(task: str = None, trigger: str = None, completed: bool = False, plan: bool = None) -> str:
+def external_function_for_plan(task, trigger):
+    # 占位函数: 在 plan=True 时调用的外部函数
+    # 这里可以根据你的需求实现相应的逻辑
+    pass
+
+def update_task(task: str = None, trigger: str = None, completed: bool = False, plan: bool = False) -> str:
     """
-    更新或添加任务到todo.json文件中。task和trigger用utf-8，基本是中文或者英文
-    :param task: 任务名称（隐含主语是你，例如用户提到明晚看电影，任务名称应当是提醒用户明晚看电影）
-    :param trigger: 触发条件
+    更新或添加任务到TODO中。若task和TODO中的任务名称相同，则更新trigger和completed时必须传入**完全同名的**task。
+    
+    :param task: 任务名称（隐含主语是你，例如用户提到明晚看电影，任务名称应当是提醒用户看电影）
+    :param trigger: 触发条件（应当是语境、语义的，不应当是闹钟式的，因为会在子任务中体现）正确示例：周溢茂回家后；错误示例：晚上8点
     :param completed: 任务完成True，未完成False    
-    :param plan: 是否需要进一步的规划拆解成子任务,True or False
+    :param plan: 是否需要进一步的规划拆解成子任务或完成子任务后更新状态,True or False
     :return: 更新状态信息
-
-
+    
     示例:
-        update_task(task="协同设计用户界面",trigger="和帅哲见面后",completed=False, plan=True)
-        update_task(task="协同设计用户界面",trigger="和帅哲见面前",completed=False, plan=True)
-        update_task(task="协同设计用户界面",tirgger=None,completed=True,Plan=False)
-        update_task(task="提醒周溢茂开会",trigger="周溢茂回家后",completed=False,plan=False)
+        update_task(task="协同设计用户界面", trigger="和帅哲见面后", plan=True) # 新建需要plan的任务        
+        update_task(task="协同设计用户界面", trigger="和帅哲见面前") # 更改Trigger
+        update_task(task="协同设计用户界面", completed=False, plan=True) # 重新规划（完成某个子任务后也需要）
+        update_task(task="协同设计用户界面", completed=True, plan=False) # 标记任务完成
+        update_task(task="提醒周溢茂开会", trigger="周溢茂回家后",plan=False) # 新建无需plan的任务
     """
-
+    
     # 处理文件为空或不存在的情况
     if not os.path.exists(TODO) or os.stat(TODO).st_size == 0:
         todo_data = []
@@ -130,6 +136,7 @@ def update_task(task: str = None, trigger: str = None, completed: bool = False, 
 
     task_found = False
 
+    # 查找是否已存在相同任务
     for item in todo_data:
         if task and item['task'] == task:
             task_found = True
@@ -139,16 +146,22 @@ def update_task(task: str = None, trigger: str = None, completed: bool = False, 
                 item['completed'] = completed
             break
     
+    # 如果任务未找到，且task和trigger都存在，则创建新任务
     if not task_found and task and trigger:
         new_task = {
             "task": task,
             "trigger": trigger,
-            "completed": False,
+            "completed": completed,
             "createdat": get_current_timestamp(),
             "subtasks": []
         }
         todo_data.append(new_task)
 
+    # 调用外部函数当plan=True时
+    if plan:
+        external_function_for_plan(task, trigger)
+
+    # 写回json文件
     with open(TODO, "w", encoding="utf-8") as fw:
         json.dump(todo_data, fw, ensure_ascii=False, indent=4)
 

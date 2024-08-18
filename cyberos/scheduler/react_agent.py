@@ -25,7 +25,7 @@ sys.path.append(project_root)
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.sqlite import SqliteSaver
 
-from cyberos.settings.configs import ModelConfig, CYBEROS
+from cyberos.settings.configs import ModelConfig, CYBEROS, USER_ID
 from cyberos.memory.context import SYSTEM_MESSAGE
 
 
@@ -34,8 +34,8 @@ from cyberos.tool.ability import update_persona, update_core_memory, retrieve_me
 from cyberos.tool.skills.tools import web_search
 
 
-USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
-THREAD_ID = 4
+
+THREAD_ID = 5
 RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "test.sqlite")
 
 
@@ -61,7 +61,7 @@ graph = create_react_agent(model=llm,
 
 
 for chunk in graph.stream(
-    {"messages": [("human", "提醒我后天去看下牙")]},
+    {"messages": [("human", "我是谁")]},
     config,
     stream_mode="values",
 ):

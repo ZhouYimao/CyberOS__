@@ -13,10 +13,14 @@ sys.path.append(project_root)
 import os
 import json
 from cyberos.settings.prompts import SYSTEM_MESSAGE_TEMPLATE
-from cyberos.settings.configs import CYBEROS
+from cyberos.settings.configs import CYBEROS, USER_ID
 
-CONFIG = os.path.join(CYBEROS, 'data', 'schema', 'config.json')
-# TODO schema 变成 user_id
+import os
+import json
+
+
+CONFIG = os.path.join(CYBEROS, 'data', USER_ID, 'config.json')
+TODO = os.path.join(CYBEROS, 'data', USER_ID, 'todo.json')
 
 def system_message() -> str:
     # 读取 config.json 文件
@@ -30,8 +34,15 @@ def system_message() -> str:
     # 将 core_memory 格式化为一个字符串，便于插入模板
     formatted_core_memory = "\n".join([f"{key}: {value}" for key, value in core_memory.items()])
 
+    # 读取 todo.json 文件
+    with open(TODO, 'r') as fr:
+        todo_data = json.load(fr)
+
+    # 提取 task 和 trigger 信息并格式化
+    formatted_todo_list = "\n".join([f"Task: {item['task']}, 触发条件: {item['trigger']}" for item in todo_data])
+
     # 格式化 SYSTEM_MESSAGE_TEMPLATE
-    system_message = SYSTEM_MESSAGE_TEMPLATE.format(persona, formatted_core_memory)
+    system_message = SYSTEM_MESSAGE_TEMPLATE.format(persona, formatted_core_memory, formatted_todo_list)
     
     return system_message
 

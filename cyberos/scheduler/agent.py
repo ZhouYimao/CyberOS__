@@ -22,13 +22,13 @@ from typing import Literal
 from langgraph.graph import StateGraph, MessagesState
 from langgraph.prebuilt import ToolNode
 
-from cyberos.settings.configs import ModelConfig, CYBEROS
+from cyberos.settings.configs import ModelConfig, CYBEROS, USER_ID
 
 from langgraph.checkpoint.sqlite import SqliteSaver
 
 llm = ModelConfig().llm
 
-USER_ID = "3367964d-5f5f-7008-1dd1dfa2e155"
+
 THREAD_ID = 2
 RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "test.sqlite")
 
