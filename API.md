@@ -16,7 +16,7 @@
 
 3. 利用上述方式创建一个用户列表: 自己创建一个uuid给用户
 
-数据库示例：
+   数据库示例：
 
     | Id | telephone_num | github_id | google_id | uuid        |
     |---|---------------|-----------|-----------|-------------|
@@ -29,7 +29,7 @@
 5. 用户保存这个信息,前端发送请求时带上JWT的token
 
 eg :用户发送请求后端message
-{在thread内创建消息 POST https:// api.emagen.cn /v1/threads/{thread_id}/messages }
+{在thread内创建消息 POST https://api.emagen.cn/v1/threads/{thread_id}/messages }
 
 数据库中存有thread_id -> user uuid 的关联表
 
@@ -71,7 +71,7 @@ curl https://api.openai.com/v1/chat/completions \
             "content": "Hello!"
         }
     ]
-}
+}'
 ```
 
 (3) GPT 中该 API 执行完成的返回结果
@@ -280,25 +280,15 @@ https://api.openai.com/v1/threads/thread_abc123 \
 response示例
 ```
 {
-
-"id": "thread_abc123",
-
-"object": "thread",
-
-"created_at": 1699014083,
-
-"metadata": {},
-
-"tool_resources": {
-
-"code_interpreter": {
-
-"file_ids": []
-
+    "id": "thread_abc123",
+    "object": "thread",
+    "created_at": 1699014083,
+    "metadata": {},
+    "tool_resources": {
+        "code_interpreter": {
+            "file_ids": []
+        }
     }
-
-}
-
 }
 ```
 
