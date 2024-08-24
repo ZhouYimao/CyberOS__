@@ -1,13 +1,5 @@
 import os
-from tool.tools import (
-    extract_todo_item,
-    update_core_memory, 
-    retrieve_memory, 
-    update_persona,
-    web_search
-)
-from tool.ultilities import save_messages, system_message
-from basic.base import MAX_MESSAGE_LENGTH, State, llm, CYBERLIFE
+from typing import List, Dict, Any
 from langchain_core.messages import (
     AIMessage,
     HumanMessage,
@@ -15,16 +7,23 @@ from langchain_core.messages import (
     SystemMessage,
     RemoveMessage
 )
-from langgraph.graph import START, END, StateGraph
 from langgraph.checkpoint.sqlite import SqliteSaver
-from typing import List, Dict, Any
+from langgraph.graph import START, END, StateGraph
 from langgraph.prebuilt import ToolNode
+from cyberos.tool.ability import (
+    extract_todo_item,
+    update_core_memory,
+    retrieve_memory,
+    update_persona,
+    web_search
+)
+from tool.ultilities import save_messages, system_message
 
 # 这里想办法把用户名和他的 uuid 传进来
-user_name =""
+user_name = ""
 user_id = "3367964d-5f5f-7008-1dd1dfa2e155"
-tools = [extract_todo_item,update_core_memory,update_persona,retrieve_memory,web_search]
-config = {"configurable":{"thread_id": "1","user_name": user_name, "user_id": user_id}}  
+tools = [extract_todo_item, update_core_memory, update_persona, retrieve_memory, web_search]
+config = {"configurable": {"thread_id": "1", "user_name": user_name, "user_id": user_id}}
 llm = llm.bind_tools(tools)
 tool_executor = ToolNode(tools)
 
@@ -118,4 +117,3 @@ if __name__ == "__main__":
         if user_input == "/exit":
             break
         print(chat_flow(user_input))
-        

@@ -1,13 +1,12 @@
-import sys
 import os
+import sys
+
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
 sys.path.append(project_root)
 
-
-import json
-from typing import Dict
 from cyberos.settings.configs import CYBEROS
 from cyberos.tool.skills.search.brief_search import search
+
 
 def extract_todo_item(info: str) -> str:
     """
@@ -56,6 +55,7 @@ def web_search(init_query: str) -> list:
     """
 
     return search(init_query)
+
 
 if __name__ == "__main__":
     search("如何在langchain中调用工具？")

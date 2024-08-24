@@ -35,7 +35,7 @@ from cyberos.tool.skills.tools import web_search
 
 
 
-THREAD_ID = 5
+THREAD_ID = 10
 RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "test.sqlite")
 
 
@@ -61,7 +61,7 @@ graph = create_react_agent(model=llm,
 
 
 for chunk in graph.stream(
-    {"messages": [("human", "我是谁")]},
+    {"messages": [("human", "提醒我明天上午去浦东机场")]},
     config,
     stream_mode="values",
 ):

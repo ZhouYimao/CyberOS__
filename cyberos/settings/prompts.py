@@ -49,6 +49,7 @@ SYSTEM_MESSAGE_TEMPLATE = f"""
 以及你的<任务列表 - task list> —— 协作用户的清单
 {{}}
 """
+
 """和当前语境相关的五条对话也会通过向量检索返回给你。"""
 # 图储存 TODO 需要大改
 GRAPH_SUMMARY_EXAMPLE = """ 

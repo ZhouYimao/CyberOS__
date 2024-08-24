@@ -29,7 +29,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 llm = ModelConfig().llm
 
 
-THREAD_ID = 2
+THREAD_ID = 5
 RDB_PATH = os.path.join(CYBEROS, "data", USER_ID, "test.sqlite")
 
 config = {"configurable":{"thread_id": THREAD_ID, "user_id": USER_ID}} 

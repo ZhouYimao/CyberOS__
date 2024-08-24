@@ -4,29 +4,28 @@
 
 更新的函数也可以写里面
 """
-import sys
 import os
+import sys
+
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 sys.path.append(project_root)
 # 真正的代码
 
-import os
-import json
 from cyberos.settings.prompts import SYSTEM_MESSAGE_TEMPLATE
 from cyberos.settings.configs import CYBEROS, USER_ID
 
 import os
 import json
 
-
 CONFIG = os.path.join(CYBEROS, 'data', USER_ID, 'config.json')
 TODO = os.path.join(CYBEROS, 'data', USER_ID, 'todo.json')
+
 
 def system_message() -> str:
     # 读取 config.json 文件
     with open(CONFIG, 'r') as fr:
         config_data = json.load(fr)
-    
+
     # 获取 persona 和 core_memory
     persona = config_data.get("persona", "")
     core_memory = config_data.get("core_memory", {})
@@ -43,8 +42,9 @@ def system_message() -> str:
 
     # 格式化 SYSTEM_MESSAGE_TEMPLATE
     system_message = SYSTEM_MESSAGE_TEMPLATE.format(persona, formatted_core_memory, formatted_todo_list)
-    
+
     return system_message
+
 
 SYSTEM_MESSAGE = system_message()
 # 使用示例

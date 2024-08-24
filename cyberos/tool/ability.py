@@ -1,8 +1,8 @@
-import sys
 import os
+import sys
+
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
 sys.path.append(project_root)
-
 
 import json
 from typing import Dict
@@ -13,10 +13,9 @@ from cyberos.settings.configs import CYBEROS, USER_ID
 
 from cyberos.storage.graph_db import retrieve
 
-
-
 CONFIG = os.path.join(CYBEROS, 'data', USER_ID, 'config.json')
 TODO = os.path.join(CYBEROS, 'data', USER_ID, 'todo.json')
+
 
 def update_persona(persona: str) -> str:
     """
@@ -29,7 +28,7 @@ def update_persona(persona: str) -> str:
 
     with open(CONFIG, "r", encoding="utf-8") as fr:
         config_data = json.load(fr)
-    
+
     config_data["persona"] = persona
 
     with open(CONFIG, "w", encoding="utf-8") as fw:
@@ -53,6 +52,7 @@ def update_core_memory(info: str) -> str:
         update_core_memory("姓名: 格蕾修, 年龄: 12, 性别: 女")
         update_core_memory("生日: 2012-12-21, 电话: 19198101145, 职业: 学生")
     """
+
     with open(CONFIG, "r", encoding="utf-8") as fr:
         config_data = json.load(fr)
 
@@ -76,6 +76,7 @@ def update_core_memory(info: str) -> str:
 
     return "更新完毕"
 
+
 def retrieve_memory(question: str) -> str:
     """
     回忆历史对话，
@@ -93,18 +94,22 @@ def retrieve_memory(question: str) -> str:
 
     return retrieve(question)
 
+
 """
 2、replan很重要，挂起todo 的时候每一步都可能要replan，其实就是检查那些小步骤有没有要增、改、删的
 （multiagent管理上下文；进入任务状态的时候，开一个agent来通信）
 """
 
+
 def get_current_timestamp():
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
 
 def external_function_for_plan(task, trigger):
     # 占位函数: 在 plan=True 时调用的外部函数
     # 这里可以根据你的需求实现相应的逻辑
     pass
+
 
 def update_task(task: str = None, trigger: str = None, completed: bool = False, plan: bool = False) -> str:
     """
@@ -123,7 +128,7 @@ def update_task(task: str = None, trigger: str = None, completed: bool = False, 
         update_task(task="协同设计用户界面", completed=True, plan=False) # 标记任务完成
         update_task(task="提醒周溢茂开会", trigger="周溢茂回家后",plan=False) # 新建无需plan的任务
     """
-    
+
     # 处理文件为空或不存在的情况
     if not os.path.exists(TODO) or os.stat(TODO).st_size == 0:
         todo_data = []
@@ -145,7 +150,7 @@ def update_task(task: str = None, trigger: str = None, completed: bool = False, 
             if completed is not None:
                 item['completed'] = completed
             break
-    
+
     # 如果任务未找到，且task和trigger都存在，则创建新任务
     if not task_found and task and trigger:
         new_task = {
