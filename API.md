@@ -24,18 +24,18 @@
     | 2 | null          | 0058      | null      | 179-444-187 |
     | 3 | 118181        | 11191     | null      | 166-151-849 |
 
-4. 登陆之后生成一个JWT的加密信息 包含{ 用户uuid 姓名}
+4. 登陆之后生成一个JWT的加密信息 包含用户 uuid, 姓名
 
 5. 用户保存这个信息,前端发送请求时带上JWT的token
 
 eg :用户发送请求后端message
 {在thread内创建消息 POST https://api.emagen.cn/v1/threads/{thread_id}/messages }
 
-数据库中存有thread_id -> user uuid 的关联表
+数据库中存有 thread_id -> user uuid 的关联表
 
-后端解析JWT 获取用户uuid
+后端解析 JWT 获取用户 uuid
 
-判断uuid ?= 数据库中对应的uuid，若不是则403
+判断uuid ?= 数据库中对应的 uuid，若不是则 403
 
 若是，则继续请求
 
@@ -45,7 +45,7 @@ eg :用户发送请求后端message
 
 1. 为给定的聊天对话创建模型响应(在thread之外) 。
 
-(1) url：```post https://api.emagen.cn/v1/chat/completions```
+(1) url：```POST https://api.emagen.cn/v1/chat/completions```
 
 JWT、+用户输入信息+agent回复信息+metadata
 
@@ -329,7 +329,7 @@ response 示例
 
 (2) 列出消息
 
-```GET https:// api.emagen.cn /v1/threads/{thread_id}/messages```
+```GET https://api.emagen.cn/v1/threads/{thread_id}/messages```
 
 请求体参数包含 USER_ID，还可选填起始时间截止时间、消息的数量等等
 
@@ -344,9 +344,9 @@ DELETE https://api.emagen.cn/v1/threads/{thread_id}/messages/{message_id}
 
 (1) 获取
 ```
-GET https:// api.emagen.cn /v1/memory/config
+GET https://api.emagen.cn/v1/memory/config
 
-GET https:// api.emagen.cn /v1/memory/todo
+GET https://api.emagen.cn/v1/memory/todo
 ```
 Memgpt 的应该是 https://memgpt.ai/api/agent/{agent_id}/memory
 
