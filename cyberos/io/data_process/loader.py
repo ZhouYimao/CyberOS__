@@ -61,13 +61,15 @@ def local_loader_cleaning(complete_file: str):
             # 根据输入类型调用不同的分割函数
             if is_file_url:
                 # 主要就是针对.html
-                elements = partition_func(url = complete_file)
+                print(ext)
+                cleaned_text = partition_func(url = complete_file)
+                
             else:
                 elements = partition_func(filename = complete_file)
-            print(ext)
-            for element in elements:
-                clean_element_text = element.text
-                cleaned_text += clean_element_text + ' '
+                print(ext)
+                for element in elements:
+                    clean_element_text = element.text
+                    cleaned_text += clean_element_text + ' '
             cleaned_text = clean_text(cleaned_text)
         except Exception as e:
             print(f"Error partitioning {complete_file}: {e}")
@@ -79,6 +81,7 @@ def local_loader_cleaning(complete_file: str):
         print(f"No partition function found for file extension: {ext}")
     return cleaned_text
 
+# 这里的file_input是url或者本地文件路径
 def loader(file_input: str):
     return local_loader_cleaning(file_input)
     

@@ -1,7 +1,6 @@
 import requests
 import re
 from bs4 import BeautifulSoup
-from unstructured.cleaners.core import clean, clean_non_ascii_chars
 import asyncio
 import aiohttp
 from selenium import webdriver
@@ -10,6 +9,8 @@ from selenium.webdriver.common.by import By
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse, urlunparse, urljoin
 from typing import List, Dict
+from cleaning import clean_text
+from .browse_parse import browse_parse
 
 def pre_process(url:str)->str:
     '''
@@ -58,21 +59,6 @@ def url_process(piece_url:str,init_url:str) ->str :
     else:
         return urljoin(init_url,piece_url)
     
-# 清洗文本的函数
-def clean_text(text):
-    # 删除大段空格和换行
-    text = clean(text = text ,
-                 bullets = True,
-                 extra_whitespace = True,)
-    # 删除引文，如 [1]、[2] 等
-    text = re.sub(r'\[\d+\]', '', text)
-    # 去除 < > 标签
-    text = re.sub(r'<[^>]+>', '', text)
-    # 使用正则表达式的 sub 函数替换掉所有 "- " 的实例
-    text = re.sub(r'-\s', '', text)
-    # 删除连续的制表符\t
-    text = re.sub(r'\t+', ' ', text)  # 将连续的制表符替换为单个空格
-    return text.strip()
 
 async def fetch_page(url: str, session: aiohttp.ClientSession):
     async with session.get(url) as response:
@@ -104,11 +90,25 @@ async def fetch_page(url: str, session: aiohttp.ClientSession):
         else:
             return {'origin_url': url, 'error': f"Failed to retrieve content, status code: {response.status}"}
 
-async def fetch_webpages_text(urls: List[str]):
+async def parse(urls: List[str]):
     async with aiohttp.ClientSession() as session:
         tasks = [fetch_page(url, session) for url in urls]
         results = await asyncio.gather(*tasks)
-        return results # 包含所有结果的列表
+         # 提取需要调用 browse_parse 的 URL 列表
+        urls_to_browse = [result['origin_url'] for result in results if 'link' not in result or not result['link']]
+        if urls_to_browse:
+            browse_results = await browse_parse(urls_to_browse)
+            # 创建一个字典，方便根据 origin_url 查找 browse_results 中的对应元素
+            browse_results_dict = {res['origin_url']: res for res in browse_results}
+            
+            for i, result in enumerate(results):
+                if result['origin_url'] in urls_to_browse:
+                    # 用 browse_results_dict 中对应的元素替换 results 中的元素
+                    results[i] = browse_results_dict[result['origin_url']]
+                    
+                
+        return results  # 包含所有结果的列表
+
 
 if __name__ == "__main__":
     # 需要解析的网页URL
@@ -118,9 +118,11 @@ if __name__ == "__main__":
         'http://www.manwei.wang/contents/View/1796.html',
         'https://www.sohu.com/a/254277297_100228214',
         'https://www.sohu.com/a/675526781_121687416',
-        'https://www.apple.com/',
+        #'https://www.apple.com/',
+        'https://open.bigmodel.cn/',
+        #'https://developer.apple.com/documentation/swiftui/'
     ]
-    results = asyncio.run(fetch_webpages_text(urls))
-    result = results[0]['page_content']
-    print(result)
+    results = asyncio.run(parse(urls))
+    for result in results:
+        print(result['page_content'])
     
