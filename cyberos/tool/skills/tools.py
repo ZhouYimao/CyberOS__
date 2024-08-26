@@ -53,7 +53,6 @@ def web_search(init_query: str) -> list:
         其中snippet是搜索结果的关键信息,对你回答用户的问题非常有帮助;url可能用于further_search。
     :rtype: list
     """
-
     return search(init_query)
 
 

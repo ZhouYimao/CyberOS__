@@ -9,13 +9,18 @@ from langchain_core.messages import (
     RemoveMessage,
 )
 from langchain_core.tools import BaseTool
-from langgraph.checkpoint import BaseCheckpointSaver
+from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.constants import START
 from langgraph.graph import END, StateGraph
 from langgraph.graph.graph import CompiledGraph
 from langgraph.prebuilt.chat_agent_executor import AgentState
 from langgraph.prebuilt.tool_executor import ToolExecutor
 from langgraph.prebuilt.tool_node import ToolNode
+
+from cyberos.settings.configs import ModelConfig
+from cyberos.storage.graph_db import graphlize_messages
+
+CONFIG = ModelConfig()
 
 
 def create_custom_graph(
@@ -37,7 +42,7 @@ def create_custom_graph(
         return "action" if state["messages"][-1].tool_calls else END
 
     def trim_router(state):
-        return "save" if len(state["messages"]) > MAX_MESSAGE_LENGTH else "agent"
+        return "trim" if len(state["messages"]) > CONFIG.MAX_MESSAGE_LENGTH else "agent"
 
     def call_model(state, config):
         return {"messages": [llm.invoke(state["messages"], config=config)]}
@@ -55,20 +60,19 @@ def create_custom_graph(
 
         return {"messages": res}
 
-    def trimmer(state):
+    def save_and_trim(state):
         messages = state["messages"]
+        graphlize_messages(messages)
         print(f"Trimming {len(messages)} messages")
         return {"messages": [RemoveMessage(id=m.id) for m in messages[1:-4]]}
 
     workflow = StateGraph(state)
     workflow.add_node("agent", call_model)
     workflow.add_node("action", call_tools)
-    workflow.add_node("trim", trimmer)
-    workflow.add_node("save", save_messages)
+    workflow.add_node("trim", save_and_trim)
     workflow.add_conditional_edges(START, trim_router)
     workflow.add_conditional_edges("agent", tools_router)
     workflow.add_edge("action", "agent")
-    workflow.add_edge("save", "trim")
     workflow.add_edge("trim", "agent")
 
     return workflow.compile(

@@ -48,11 +48,11 @@ class ModelConfig:
         self.gpt = ChatOpenAI(model="gpt-4o-mini",
                               api_key="sk-proj-zTCcNQY0hNjiv3lfNVuwT3BlbkFJZTIqWzRfS1bKsg1kNDvr")
         
-        
         self.embed_model = OpenAIEmbeddings(model=self.BASE_EMBEDDING_MODEL, 
                                             api_key=self.EMBEDDING_API_KEY, 
                                             base_url=self.EMBEDDING_URL)
-        
+
+        self.MAX_MESSAGE_LENGTH = 20
 
 
 

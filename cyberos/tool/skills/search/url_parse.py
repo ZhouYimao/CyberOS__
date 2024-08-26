@@ -1,21 +1,15 @@
+import requests
+import re
+from bs4 import BeautifulSoup
+from unstructured.cleaners.core import clean, clean_non_ascii_chars
 import asyncio
+import aiohttp
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from concurrent.futures import ThreadPoolExecutor
-from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urlunparse, urljoin
 from typing import List, Dict
-import re
-'''
-外部调用方法：
-    from url_parse import url_parse
-    results = asyncio.run(url_parse(your_url))
-
-
-    传入一个ur1,读取url中的page_content以及子链接   
-    返回{'origin_url':xxx, 'page content':xxx,'link':[{'url':xxx,description':xxx}1}
-'''
 
 def pre_process(url:str)->str:
     '''
@@ -36,12 +30,9 @@ def get_domain(url: str)->str:
     # 使用urlparse函数解析URL
     parsed_url = urlparse(url)
 
-    # 从解析结果中提取协议和网络位置
-    scheme = parsed_url.scheme
-    netloc = parsed_url.netloc
 
     # 将协议和网络位置组合成包含协议的完整域名
-    domain_with_scheme = urlunparse((scheme, netloc, '', '', '', ''))
+    domain_with_scheme = urlunparse((parsed_url.scheme, parsed_url.netloc, '', '', '', ''))
     return domain_with_scheme
 
 
@@ -66,82 +57,70 @@ def url_process(piece_url:str,init_url:str) ->str :
     # 不然认为是相对路径,返回拼接后的路径
     else:
         return urljoin(init_url,piece_url)
-
-
-async def fetch_page(init_url: str):
-    loop = asyncio.get_running_loop()
-    executor = ThreadPoolExecutor(max_workers=1)
-    # 使用无头模式启动 Chrome
-    options = Options()
-    options.add_argument('--headless')  # 启用无头模式
     
-    future = loop.run_in_executor(executor, lambda: browse(init_url, options))
-    return await future
+# 清洗文本的函数
+def clean_text(text):
+    # 删除大段空格和换行
+    text = clean(text = text ,
+                 bullets = True,
+                 extra_whitespace = True,)
+    # 删除引文，如 [1]、[2] 等
+    text = re.sub(r'\[\d+\]', '', text)
+    # 去除 < > 标签
+    text = re.sub(r'<[^>]+>', '', text)
+    # 使用正则表达式的 sub 函数替换掉所有 "- " 的实例
+    text = re.sub(r'-\s', '', text)
+    # 删除连续的制表符\t
+    text = re.sub(r'\t+', ' ', text)  # 将连续的制表符替换为单个空格
+    return text.strip()
 
-def browse(url:str, options) :
-    driver = webdriver.Chrome(options=options)
-    # 获取init_url中的信息
-    driver.get(url)
-    driver.implicitly_wait(10)  # 等待最多10秒
+async def fetch_page(url: str, session: aiohttp.ClientSession):
+    async with session.get(url) as response:
+        if response.status == 200:
+            html = await response.text()
+            soup = BeautifulSoup(html, "html.parser")
+            text = soup.get_text(separator=' ', strip=True)
+            text = clean_text(text)
 
-    html = driver.page_source
-    init_soup = BeautifulSoup(html, 'html.parser')
-    
-    # 清洗文本
-    paragraphs = init_soup.find_all('p')
-    # 初始化一个空字符串用于存储清洗后的文本
-    clean_text_content = ''
-    # 遍历所有的<p>标签
-    for para in paragraphs:
-        # 提取文本并去除前后空白字符
-        text = para.get_text(strip=True)
-        # 去除文本中的大段空格
-        cleaned_text = re.sub(r'\s+', ' ', text)
-        # 将清洗后的文本添加到结果字符串中
-        clean_text_content += cleaned_text
-    
-    '''
-    text_content = init_soup.get_text(separator=' ', strip=True)
-    clean_text_content = ' '.join(text_content.split())
-    '''
-    
-    # 提取所有链接的文本描述
-    links_and_descriptions = []
-    links = init_soup.find_all('a', href=True)
-    id_num = 0
-    for link in links:
-        href = link.get('href')
-        if href.startswith('#'):
-            continue
-        piece_url = url_process(href,url)
-        piece_description = link.get_text(strip=True)
-        id_num += 1
-        link_and_description = {
-            'id': id_num,
-            'url': piece_url,
-            'description': piece_description
-        }
-        links_and_descriptions.append(link_and_description)
-    
-    all_message = {'origin_url':url,'page_content':clean_text_content}
-    all_message['link'] = links_and_descriptions
-    driver.quit()  # 确保退出浏览器
-    return all_message
+            links_and_descriptions = []
+            links = soup.find_all('a', href=True)
+            id_num = 0
+            for link in links:
+                href = link.get('href')
+                if href.startswith('#'):
+                    continue
+                piece_url = url_process(href, url)
+                piece_description = link.get_text(strip=True)
+                id_num += 1
+                link_and_description = {
+                    'id': id_num,
+                    'url': piece_url,
+                    'description': piece_description
+                }
+                links_and_descriptions.append(link_and_description)
 
-async def parse(urls: list):
-    tasks = [fetch_page(url) for url in urls]
-    results = await asyncio.gather(*tasks)
-    return results
+            all_message = {'origin_url': url, 'page_content': text, 'link': links_and_descriptions}
+            return all_message
+        else:
+            return {'origin_url': url, 'error': f"Failed to retrieve content, status code: {response.status}"}
+
+async def fetch_webpages_text(urls: List[str]):
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_page(url, session) for url in urls]
+        results = await asyncio.gather(*tasks)
+        return results # 包含所有结果的列表
 
 if __name__ == "__main__":
+    # 需要解析的网页URL
     urls = [
-        'https://www.facebook.com',
-        #'https://langchain-ai.github.io/langgraph/tutorials/#rag',
-        #'http://www.manwei.wang/contents/View/1796.html',
-        #'https://www.sohu.com/a/254277297_100228214',
-        #'https://www.sohu.com/a/675526781_121687416'
+        'https://zh.wikihow.com/%E6%89%93%E5%BC%80EML%E6%96%87%E4%BB%B6',
+        'https://langchain-ai.github.io/langgraph/tutorials/#rag',
+        'http://www.manwei.wang/contents/View/1796.html',
+        'https://www.sohu.com/a/254277297_100228214',
+        'https://www.sohu.com/a/675526781_121687416',
+        'https://www.apple.com/',
     ]
-    results = asyncio.run(parse(urls))
-    for result in results:
-        print(result['page_content'])
-
+    results = asyncio.run(fetch_webpages_text(urls))
+    result = results[0]['page_content']
+    print(result)
+    

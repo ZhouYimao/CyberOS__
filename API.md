@@ -16,13 +16,13 @@
 
 3. 利用上述方式创建一个用户列表: 自己创建一个uuid给用户
 
-数据库示例：
-
-    | Id | telephone_num | github_id | google_id | uuid        |
-    |---|---------------|-----------|-----------|-------------|
-    | 1 | 1111112       | null      | null      | 199-484-163 |
-    | 2 | null          | 0058      | null      | 179-444-187 |
-    | 3 | 118181        | 11191     | null      | 166-151-849 |
+   数据库示例：
+   
+| Id  | telephone_num | github_id | google_id | uuid         |
+|-----|---------------|-----------|-----------|--------------|
+| 1   | 1111112       | null      | null      | 199-484-163  |
+| 2   | null          | 0058      | null      | 179-444-187  |
+| 3   | 11818         | 11191     | null      | 166-151-849  |
 
 4. 登陆之后生成一个JWT的加密信息 包含{ 用户uuid 姓名}
 
@@ -31,25 +31,25 @@
 eg :用户发送请求后端message
 {在thread内创建消息 POST https:// api.emagen.cn /v1/threads/{thread_id}/messages }
 
-数据库中存有thread_id -> user uuid 的关联表
+数据库中存有 thread_id -> user uuid 的关联表
 
-后端解析JWT 获取用户uuid
+后端解析 JWT 获取用户 uuid
 
-判断uuid ?= 数据库中对应的uuid，若不是则403
+判断 uuid ?= 数据库中对应的 uuid，若不是则 403
 
 若是，则继续请求
 
-由于现在申请上述认证方式需要一些企业信息之类的，现在先用Jaccount做认证
+由于现在申请上述认证方式需要一些企业信息之类的，现在先用 jAccount 做认证
 
-即前端呈现为一个界面，上面有一个按钮，按下按钮后跳转jaccount登录，登录成功后返回到另一个页面，后端将得到学生学号，姓名这些unique的数据，用来第三步的创建过程
+即前端呈现为一个界面，上面有一个按钮，按下按钮后跳转 jAccount 登录，登录成功后返回到另一个页面，后端将得到学生学号，姓名这些unique的数据，用来第三步的创建过程
 
-1. 为给定的聊天对话创建模型响应(在thread之外) 。
+1. 为给定的聊天对话创建模型响应 (在 thread 之外) 。
 
-(1) url：```post https://api.emagen.cn/v1/chat/completions```
+(1) url: ```POST https://api.emagen.cn/v1/chat/completions```
 
-JWT、+用户输入信息+agent回复信息+metadata
+JWT + 用户输入信息 + agent 回复信息 + metadata
 
-(2) GPT中该部分相应post请求发送实例：
+(2) GPT 中该部分相应 POST 请求发送实例：
 
 ```
 curl https://api.openai.com/v1/chat/completions \
@@ -71,10 +71,11 @@ curl https://api.openai.com/v1/chat/completions \
             "content": "Hello!"
         }
     ]
-}
+}'
 ```
 
 (3) GPT 中该 API 执行完成的返回结果
+
 ```
 {
     "id": "chatcmpl-123",
@@ -87,8 +88,7 @@ curl https://api.openai.com/v1/chat/completions \
             "index": 0,
             "message": {
                 "role": "assistant",
-                "content": "\n\nHello there, how may I assist you
-                today?",
+                "content": "\n\nHello there, how may I assist you today?"
             },
             "logprobs": null,
             "finish_reason": "stop"
@@ -128,7 +128,7 @@ curl https://api.openai.com/v1/uploads \
 }'
 ```
 
-Response 示例 (用户那里存一份 upload_id，后端那里也存 user_id 和 upload_id 并把他俩进行绑定，之后能用来校验
+Response 示例 (用户那里存一份 upload_id, 后端那里也存 user_id 和 upload_id 并把他俩进行绑定，之后能用来校验
 
 ```
 {
@@ -147,7 +147,7 @@ Response 示例 (用户那里存一份 upload_id，后端那里也存 user_id �
 
 ```POST https:// api.emagen.cn /v1/uploads/{upload_id}/parts```
 
-请求体包含 THREAD_ID 和 JWT，路径参数中的 upload_id 是每个上传部分都会有的
+请求体包含 THREAD_ID 和 JWT, 路径参数中的 upload_id 是每个上传部分都会有的
 
 请求示例
 
@@ -155,6 +155,8 @@ Response 示例 (用户那里存一份 upload_id，后端那里也存 user_id �
 curl https://api.openai.com/v1/uploads/upload_abc123/parts
 
 -H "Authorization: Bearer $OPENAI_API_KEY"\
+
+-H "Content-Type: multipart/form-data"
 
 -F data="aHR0cHM6Ly9hcGkub3BlbmFpLmNvbS92MS91cGxvYWRz..."
 ```
@@ -172,9 +174,9 @@ Response示例
 
 (3) Complete upload
 
-```POST https:// api.emagen.cn /v1/uploads/{upload_id}/complete```
+```POST https://api.emagen.cn/v1/uploads/{upload_id}/complete```
 
-请求体包含 THREAD_ID 和 JWT，该 api 是确认是否上传完成
+请求体包含 THREAD_ID 和 JWT, 该 api 是确认是否上传完成
 
 ```
 curl https://api.openai.com/v1/uploads/upload_abc123/complete
@@ -207,6 +209,7 @@ curl https://api.openai.com/v1/uploads/upload_abc123/complete
 (4) Cancel upload
 
 ```POST https:// api.emagen.cn /v1/uploads/{upload_id}/cancel```
+
 ```
 curl https://api.openai.com/v1/uploads/upload_abc123/cancel
 
@@ -243,7 +246,9 @@ curl https://api.openai.com/v1/threads \
 
 -d ''
 ```
+
 response 示例 数据库那里存一份 thread_id 和 user_id，方便之后进行校验
+
 ```
 {
     "id": "thread_abc123",
@@ -256,49 +261,37 @@ response 示例 数据库那里存一份 thread_id 和 user_id，方便之后进
 
 (2) 检索线程
 
-```GET https:// api.emagen.cn /v1/threads/{THREAD_ID}```
+```GET https://api.emagen.cn/v1/threads/{THREAD_ID}```
 
 JWT
 
 该功能是为了获得 thread 对象，即与该 thread 有关的信息
 
 请求示例
+
 ```
-curl
-https://api.openai.com/v1/threads/thread_abc123 \
+curl https://api.openai.com/v1/threads/thread_abc123 \
 
--H
-"Content-Type: application/json" \
+-H "Content-Type: application/json" \
 
--H
-"Authorization: Bearer $OPENAI_API_KEY" \
+-H "Authorization: Bearer $OPENAI_API_KEY" \
 
--H
-"OpenAI-Beta: assistants=v2"
+-H "OpenAI-Beta: assistants=v2"
 ```
 
 response示例
+
 ```
 {
-
-"id": "thread_abc123",
-
-"object": "thread",
-
-"created_at": 1699014083,
-
-"metadata": {},
-
-"tool_resources": {
-
-"code_interpreter": {
-
-"file_ids": []
-
+    "id": "thread_abc123",
+    "object": "thread",
+    "created_at": 1699014083,
+    "metadata": {},
+    "tool_resources": {
+        "code_interpreter": {
+            "file_ids": []
+        }
     }
-
-}
-
 }
 ```
 
@@ -309,6 +302,7 @@ response示例
 JWT
 
 请求示例
+
 ```
 curl https://api.openai.com/v1/threads/thread_abc123 \
 
@@ -320,7 +314,9 @@ curl https://api.openai.com/v1/threads/thread_abc123 \
 
 -X DELETE
 ```
+
 response 示例
+
 ```
 {
     "id": "thread_abc123",
@@ -328,6 +324,7 @@ response 示例
     "deleted": true
 }
 ```
+
 4. Message
 
 (1) 在 thread 内创建消息
@@ -339,7 +336,7 @@ response 示例
 
 (2) 列出消息
 
-```GET https:// api.emagen.cn /v1/threads/{thread_id}/messages```
+```GET https://api.emagen.cn/v1/threads/{thread_id}/messages```
 
 请求体参数包含 USER_ID，还可选填起始时间截止时间、消息的数量等等
 
@@ -350,19 +347,23 @@ GET https://api.emagen.cn/v1/threads/{thread_id}/messages/{message_id}
 
 DELETE https://api.emagen.cn/v1/threads/{thread_id}/messages/{message_id}
 ```
+
 5. 用户信息和 todo
 
 (1) 获取
-```
-GET https:// api.emagen.cn /v1/memory/config
 
-GET https:// api.emagen.cn /v1/memory/todo
 ```
+GET https://api.emagen.cn/v1/memory/config
+
+GET https://api.emagen.cn/v1/memory/todo
+```
+
 Memgpt 的应该是 https://memgpt.ai/api/agent/{agent_id}/memory
 
 问 GPT 说上面的 GET 是即时记忆，下面的是存档记忆
 
 (2) 更新
+
 ```
 POST https://api.emagen.cn/v1/memory/config
 DELETE https://api.emagen.cn/v1/memory/config
