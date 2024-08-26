@@ -16,21 +16,21 @@ from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
 from psycopg.rows import dict_row
 from psycopg_pool import AsyncConnectionPool
 
-POSTGRESQL_CONFIG = {
-    'dbname': 'langgraph_test',
-    'user': 'cyberlife_os',
-    'password': 'cyberlife2024',
-    'host': 'localhost',
-    'port': 5432
-}
-
 # POSTGRESQL_CONFIG = {
 #     'dbname': 'langgraph_test',
-#     'user': 'cyberlife',
-#     'password': 'cyberlife202408!',
-#     'host': 'pgm-uf68bqhbfcvwj220ho.rwlb.rds.aliyuncs.com',
+#     'user': 'cyberlife_os',
+#     'password': 'cyberlife2024',
+#     'host': 'localhost',
 #     'port': 5432
 # }
+
+POSTGRESQL_CONFIG = {
+    'dbname': 'langgraph_test',
+    'user': 'cyberlife',
+    'password': 'cyberlife202408!',
+    'host': 'pgm-uf68bqhbfcvwj220ho.rwlb.rds.aliyuncs.com',
+    'port': 5432
+}
 
 # 构建连接字符串
 DB_URI = f"postgresql://{POSTGRESQL_CONFIG['user']}:{POSTGRESQL_CONFIG['password']}@{POSTGRESQL_CONFIG['host']}:{POSTGRESQL_CONFIG['port']}/{POSTGRESQL_CONFIG['dbname']}"
@@ -68,7 +68,7 @@ async def main():
         await checkpointer.setup()
 
         graph = create_react_agent(model, tools=tools, checkpointer=checkpointer)
-        config = {"configurable": {"thread_id": "4"}}
+        config = {"configurable": {"thread_id": "6"}}
         res = await graph.ainvoke(
             {"messages": [("human", "what's the weather in nyc")]}, config
         )
