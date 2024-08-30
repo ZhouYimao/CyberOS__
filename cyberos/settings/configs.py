@@ -1,8 +1,7 @@
 from dotenv import load_dotenv
 import os
 
-from langchain_openai import ChatOpenAI
-from langchain_community.embeddings import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 from llama_index.graph_stores.neo4j import Neo4jPropertyGraphStore
 

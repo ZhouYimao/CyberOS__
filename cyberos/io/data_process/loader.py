@@ -15,9 +15,9 @@ from unstructured.partition.pptx import partition_pptx
 from docx_loader import docx_loader
 from pdf_loader import pdf_loader
 from html_loader import html_loader
-from cleaning import clean_text
+from text_utils import clean_text
 from url_tool import is_url,get_ext_from_url,check_url
-
+from img_loader import img_loader
 
 
 # 根据文件扩展名选择分割函数的字典
@@ -27,9 +27,6 @@ partition_functions = {
     '.csv': partition_csv,
     '.txt': partition_text,
     # 为图像文件添加更多扩展名
-    '.png': partition_image,
-    '.jpg': partition_image,
-    '.jpeg': partition_image,
     '.md': partition_md,
     '.ppt': partition_ppt,
     '.pptx': partition_pptx,
@@ -73,6 +70,8 @@ def local_loader_cleaning(complete_file: str):
             cleaned_text = clean_text(cleaned_text)
         except Exception as e:
             print(f"Error partitioning {complete_file}: {e}")
+    elif ext in ['.png','.jpg','.jpeg','.webp']:
+        cleaned_text = img_loader(complete_file)
     elif ext == '.docx':
         cleaned_text = docx_loader(complete_file)
     elif ext == '.pdf':
@@ -86,6 +85,6 @@ def loader(file_input: str):
     return local_loader_cleaning(file_input)
     
 if __name__ == "__main__":
-    file_input = 'https://open.bigmodel.cn/'
+    file_input = '../test_file/mine/agent.md'
     cleaned_text = loader(file_input)
     print(cleaned_text)

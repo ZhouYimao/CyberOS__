@@ -1,5 +1,5 @@
 from langchain_community.document_loaders import Docx2txtLoader
-from cleaning import clean_text
+from text_utils import clean_text
 # 这里的file_name就是完整路径
 def docx_loader(filename:str):
     loader = Docx2txtLoader(filename)

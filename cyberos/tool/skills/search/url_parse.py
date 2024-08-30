@@ -9,8 +9,15 @@ from selenium.webdriver.common.by import By
 from concurrent.futures import ThreadPoolExecutor
 from urllib.parse import urlparse, urlunparse, urljoin
 from typing import List, Dict
-from cleaning import clean_text
+
 from .browse_parse import browse_parse
+import re
+import os
+import sys
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+sys.path.append(project_root)
+from cyberos.io.data_process.text_utils import clean_text
+from unstructured.cleaners.core import clean, clean_non_ascii_chars
 
 def pre_process(url:str)->str:
     '''

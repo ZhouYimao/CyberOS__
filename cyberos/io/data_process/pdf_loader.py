@@ -1,4 +1,4 @@
-from cleaning import clean_text
+from text_utils import clean_text
 from langchain_community.document_loaders import PyPDFLoader
 def pdf_loader(pdf_path: str):
     loader = PyPDFLoader(pdf_path, extract_images=True)

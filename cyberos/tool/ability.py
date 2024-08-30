@@ -25,7 +25,6 @@ def update_persona(persona: str) -> str:
     示例:
         update_persona("我是名侦探柯南，我喜欢解谜，我是一个聪明的人")
     """
-
     with open(CONFIG, "r", encoding="utf-8") as fr:
         config_data = json.load(fr)
 
@@ -122,11 +121,11 @@ def update_task(task: str = None, trigger: str = None, completed: bool = False, 
     :return: 更新状态信息
     
     示例:
-        update_task(task="协同设计用户界面", trigger="和帅哲见面后", plan=True) # 新建需要plan的任务        
-        update_task(task="协同设计用户界面", trigger="和帅哲见面前") # 更改Trigger
-        update_task(task="协同设计用户界面", completed=False, plan=True) # 重新规划（完成某个子任务后也需要）
-        update_task(task="协同设计用户界面", completed=True, plan=False) # 标记任务完成
-        update_task(task="提醒周溢茂开会", trigger="周溢茂回家后",plan=False) # 新建无需plan的任务
+        update_task(task="协同设计用户界面", trigger="和帅哲见面后", plan=True)  # 新建需要plan的任务
+        update_task(task="协同设计用户界面", trigger="和帅哲见面前")  # 更改Trigger
+        update_task(task="协同设计用户界面", completed=False, plan=True)  # 重新规划（完成某个子任务后也需要）
+        update_task(task="协同设计用户界面", completed=True, plan=False)  # 标记任务完成
+        update_task(task="提醒周溢茂开会", trigger="周溢茂回家后",plan=False)  # 新建无需plan的任务
     """
 
     # 处理文件为空或不存在的情况

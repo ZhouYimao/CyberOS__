@@ -6,7 +6,11 @@ from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urlunparse, urljoin
 from typing import List, Dict
-from cleaning import clean_text
+import os
+import sys
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+sys.path.append(project_root)
+from cyberos.io.data_process.text_utils import clean_text
 import re
 '''
 外部调用方法：
