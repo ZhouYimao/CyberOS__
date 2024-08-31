@@ -23,6 +23,7 @@ from api.openai_chat_completions.chat_completions import setup_openai_chat_compl
 from api.threads.index import setup_threads_index_router
 from api.threads.messages import setup_threads_messages_router
 from api.uploads.index import setup_uploads_index_router
+from api.files.index import setup_files_index_router
 
 V1_PREFIX= "/v1"
 
@@ -35,6 +36,7 @@ app.include_router(setup_openai_chat_completions_router(),prefix=V1_PREFIX)
 app.include_router(setup_threads_index_router(),prefix=V1_PREFIX)
 app.include_router(setup_threads_messages_router(),prefix=V1_PREFIX)
 app.include_router(setup_uploads_index_router(),prefix=V1_PREFIX)
+app.include_router(setup_files_index_router(),prefix=V1_PREFIX)
 
 #用来绑定服务器中的静态文件
 #app.mount("/static",StaticFiles(directory="静态文件名_代更改"))

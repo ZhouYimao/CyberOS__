@@ -49,10 +49,10 @@ eg :用户发送请求后端message
 
 JWT + 用户输入信息 + agent 回复信息 + metadata
 
-(2) GPT 中该部分相应 POST 请求发送实例：
+(2) 该部分相应 POST 请求发送实例：
 
 ```
-curl https://api.openai.com/v1/chat/completions \
+curl https://api.emagen.cn/v1/chat/completions \
 
 -H "Content-Type: application/json" \
 
@@ -74,7 +74,7 @@ curl https://api.openai.com/v1/chat/completions \
 }'
 ```
 
-(3) GPT 中该 API 执行完成的返回结果
+(3) 该 API 执行完成的返回结果
 
 ```
 {
@@ -102,7 +102,7 @@ curl https://api.openai.com/v1/chat/completions \
 }
 ```
 
-2. 上传各种文件
+2. 分步上传大文件
 
 直接在路径末尾加一个表示文件格式的路径参数
 
@@ -115,7 +115,7 @@ curl https://api.openai.com/v1/chat/completions \
 请求示例:
 
 ```
-curl https://api.openai.com/v1/uploads \
+curl https://api.emagen.cn/v1/uploads \
 
 -H "Authorization: Bearer $OPENAI_API_KEY" \
 
@@ -145,14 +145,14 @@ Response 示例 (用户那里存一份 upload_id, 后端那里也存 user_id 和
 
 (2) Add upload part
 
-```POST https:// api.emagen.cn /v1/uploads/{upload_id}/parts```
+```POST https://api.emagen.cn/v1/uploads/{upload_id}/parts```
 
 请求体包含 THREAD_ID 和 JWT, 路径参数中的 upload_id 是每个上传部分都会有的
 
 请求示例
 
 ```
-curl https://api.openai.com/v1/uploads/upload_abc123/parts
+curl https://api.emagen.cn/v1/uploads/upload_abc123/parts
 
 -H "Authorization: Bearer $OPENAI_API_KEY"\
 
@@ -179,7 +179,7 @@ Response示例
 请求体包含 THREAD_ID 和 JWT, 该 api 是确认是否上传完成
 
 ```
-curl https://api.openai.com/v1/uploads/upload_abc123/complete
+curl https://api.emagen.cn/v1/uploads/upload_abc123/complete
 
 -d
 '{
@@ -211,7 +211,7 @@ curl https://api.openai.com/v1/uploads/upload_abc123/complete
 ```POST https:// api.emagen.cn /v1/uploads/{upload_id}/cancel```
 
 ```
-curl https://api.openai.com/v1/uploads/upload_abc123/cancel
+curl https://api.emagen.cn/v1/uploads/upload_abc123/cancel
 
 {
     "id": "upload_abc123",
@@ -225,7 +225,149 @@ curl https://api.openai.com/v1/uploads/upload_abc123/cancel
 }
 ```
 
-3. 创建、检索、删除 thread
+3. 直接上传较小文件
+（1）上传文件
+上传笔记
+
+```POST https://api.emagen.cn/v1/files/markdowns```
+
+JWT
+请求示例：
+
+```
+curl -X POST https://api.yourdomain.com/v1/files/markdowns \
+  -H "Content-Type: multipart/form-data" \
+  -H "Authorization: Bearer $YOUR_API_KEY" \
+  -F purpose="user-uploaded-markdown" \
+  -F "file=@path/to/your/markdown_file.md"
+```
+
+response示例
+
+```
+{
+  "id": "file_123456789",
+  "object": "file",
+  "bytes": 2048,
+  "created_at": 1713226573,
+  "filename": "markdown_file.md",
+  "purpose": "user-uploaded-markdown"
+}
+```
+
+上传其他文件
+
+```POST https://api.emagen.cn/v1/files/{file_format}```
+
+JWT
+请求示例：
+
+```
+curl -X POST https://api.yourdomain.com/v1/files/pdf \
+  -H "Content-Type: multipart/form-data" \
+  -H "Authorization: Bearer $YOUR_API_KEY" \
+  -F purpose="user-uploaded-document" \
+  -F "file=@path/to/your/document.pdf"
+
+```
+
+response示例
+
+```
+{
+  "id": "file_987654321",
+  "object": "file",
+  "bytes": 4096,
+  "created_at": 1713226590,
+  "filename": "document.pdf",
+  "purpose": "user-uploaded-document"
+}
+
+```
+
+
+（2）列出上传过的文件
+```GET https://api.emagen.cn/v1/files```
+
+JWT
+请求示例：
+
+```
+curl https://api.emagen.cn/v1/files \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+```
+
+response示例：
+
+```
+{
+  "data": [
+    {
+      "id": "file-abc123",
+      "object": "file",
+      "bytes": 175,
+      "created_at": 1613677385,
+      "filename": "salesOverview.pdf",
+      "purpose": "assistants",
+    },
+    {
+      "id": "file-abc123",
+      "object": "file",
+      "bytes": 140,
+      "created_at": 1613779121,
+      "filename": "puppy.jsonl",
+      "purpose": "fine-tune",
+    }
+  ],
+  "object": "list"
+}
+```
+
+（3）检索特定文件的信息
+```GET https://api.emagen.cn/v1/files/{file_id}```
+
+请求示例：
+
+```
+curl https://api.emagen.cn/v1/files/file-abc123 \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+```
+
+response示例：
+
+```
+{
+  "id": "file-abc123",
+  "object": "file",
+  "bytes": 120000,
+  "created_at": 1677610602,
+  "filename": "mydata.jsonl",
+  "purpose": "fine-tune",
+}
+```
+
+（4）删除文件
+```DELETE https://api.emagen.cn/v1/files/{file_id}```
+
+请求示例：
+
+```
+curl https://api.emagen.cn/v1/files/file-abc123 \
+  -X DELETE \
+  -H "Authorization: Bearer $OPENAI_API_KEY"
+```
+
+response示例：
+
+```
+{
+  "id": "file-abc123",
+  "object": "file",
+  "deleted": true
+}
+```
+
+4. 创建、检索、删除 thread
 
 (1) 创建 thread
 
@@ -236,7 +378,7 @@ JWT
 请求示例：
 
 ```
-curl https://api.openai.com/v1/threads \
+curl https://api.emagen.cn/v1/threads \
 
 -H "Content-Type: application/json" \
 
@@ -270,7 +412,7 @@ JWT
 请求示例
 
 ```
-curl https://api.openai.com/v1/threads/thread_abc123 \
+curl https://api.emagen.cn/v1/threads/thread_abc123 \
 
 -H "Content-Type: application/json" \
 
@@ -297,14 +439,14 @@ response示例
 
 (3) 删除 thread
 
-```DELETE https://api.emagen.cn/v1/threads/{thread_id}```
+```DELETE https://api.emagen.cn/v1/threads/{THREAD_ID}```
 
 JWT
 
 请求示例
 
 ```
-curl https://api.openai.com/v1/threads/thread_abc123 \
+curl https://api.emagen.cn/v1/threads/thread_abc123 \
 
 -H "Content-Type: application/json" \
 
@@ -325,28 +467,174 @@ response 示例
 }
 ```
 
-4. Message
+5. Message
 
 (1) 在 thread 内创建消息
 
-```POST https://api.emagen.cn/v1/threads/{thread_id}/messages```
+```POST https://api.emagen.cn/v1/threads/{THREAD_ID}/messages```
 
 数据库也存一份 thread_id
 -> user.uuid
+请求示例
+
+```
+curl https://api.emagen.cn/v1/threads/thread_abc123/messages \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" \
+  -d '{
+      "role": "user",
+      "content": "How does AI work? Explain it in simple terms."
+    }'
+```
+
+```
+reaponse示例：
+{
+  "id": "msg_abc123",
+  "object": "thread.message",
+  "created_at": 1713226573,
+  "assistant_id": null,
+  "thread_id": "thread_abc123",
+  "run_id": null,
+  "role": "user",
+  "content": [
+    {
+      "type": "text",
+      "text": {
+        "value": "How does AI work? Explain it in simple terms.",
+        "annotations": []
+      }
+    }
+  ],
+  "attachments": [],
+  "metadata": {}
+}
+```
+
 
 (2) 列出消息
 
-```GET https://api.emagen.cn/v1/threads/{thread_id}/messages```
+```GET https://api.emagen.cn/v1/threads/{THREAD_ID}/messages```
 
 请求体参数包含 USER_ID，还可选填起始时间截止时间、消息的数量等等
+请求示例：
+
+```
+curl https://api.emagen.cn/v1/threads/thread_abc123/messages \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" 
+```
+
+reaponse示例：
+
+```
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "msg_abc123",
+      "object": "thread.message",
+      "created_at": 1699016383,
+      "assistant_id": null,
+      "thread_id": "thread_abc123",
+      "run_id": null,
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": {
+            "value": "How does AI work? Explain it in simple terms.",
+            "annotations": []
+          }
+        }
+      ],
+      "attachments": [],
+      "metadata": {}
+    },
+    {
+      "id": "msg_abc456",
+      "object": "thread.message",
+      "created_at": 1699016383,
+      "assistant_id": null,
+      "thread_id": "thread_abc123",
+      "run_id": null,
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": {
+            "value": "Hello, what is AI?",
+            "annotations": []
+          }
+        }
+      ],
+      "attachments": [],
+      "metadata": {}
+    }
+  ],
+  "first_id": "msg_abc123",
+  "last_id": "msg_abc456",
+  "has_more": false
+}
+```
 
 (3) 检索和删除某一条特定的消息
 
-```
-GET https://api.emagen.cn/v1/threads/{thread_id}/messages/{message_id}
+```GET https://api.emagen.cn/v1/threads/{THREAD_ID}/messages/{MESSAGE_ID}```
 
-DELETE https://api.emagen.cn/v1/threads/{thread_id}/messages/{message_id}
+请求示例：
+
 ```
+curl https://api.api.emagen.cn/v1/threads/thread_abc123/messages/msg_abc123 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" 
+```
+
+response示例：
+
+```
+{
+  "id": "msg_abc123",
+  "object": "thread.message",
+  "created_at": 1699017614,
+  "assistant_id": null,
+  "thread_id": "thread_abc123",
+  "run_id": null,
+  "role": "user",
+  "content": [
+    {
+      "type": "text",
+      "text": {
+        "value": "How does AI work? Explain it in simple terms.",
+        "annotations": []
+      }
+    }
+  ],
+  "attachments": [],
+  "metadata": {}
+}
+```
+
+```DELETE https://api.emagen.cn/v1/threads/{THREAD_ID}/messages/{MESSAGE_ID}```
+
+请求示例：
+
+```
+curl -X DELETE https://api.emagen.cn/v1/threads/thread_abc123/messages/msg_abc123 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $OPENAI_API_KEY" 
+```
+
+response示例：
+
+```
+{
+  "id": "msg_abc123",
+  "object": "thread.message.deleted",
+  "deleted": true
+}
+```
+
 
 5. 用户信息和 todo
 

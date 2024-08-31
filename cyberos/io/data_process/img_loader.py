@@ -47,7 +47,7 @@ def extract_text_from_image(img_path, clarify_flag=False, lang='ch'):
         
     return extracted_text
 
-def img_loader(file_name: str,clarify_flag=False):
+def img_loader(file_name: str,clarify_flag=True):
     text = extract_text_from_image(file_name, clarify_flag)
     return text
 

@@ -1,0 +1,271 @@
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:41:55] "GET /auth/login?code=4362929fc8ef491eba7d3a95d73d8790 HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+Request access token failed
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:42:50] "GET /auth/login?code=4362929fc8ef491eba7d3a95d73d8790 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Aug/2024 11:43:20] "GET /auth/login?code=af7071b3b7d04dc187736081abfeb1f0 HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+Request access token failed
+[]
+Request access token failed
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:43:43] "GET /auth/login?code=af7071b3b7d04dc187736081abfeb1f0 HTTP/1.1" 200 -
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:49:48] "[33mGET /auth/ HTTP/1.1[0m" 404 -
+127.0.0.1 - - [30/Aug/2024 11:49:53] "GET /auth HTTP/1.1" 200 -
+127.0.0.1 - - [30/Aug/2024 11:49:55] "GET /auth/login?code=56079700b241467f8686ce5694f7ac1a HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+56079700b241467f8686ce5694f7ac1a
+Request access token failed
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:52:13] "GET /auth/login?code=56079700b241467f8686ce5694f7ac1a HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+56079700b241467f8686ce5694f7ac1a
+Request access token failed
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:53:36] "GET /auth/login?code=56079700b241467f8686ce5694f7ac1a HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+56079700b241467f8686ce5694f7ac1a
+ready to get access_token
+Request access token failed
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:54:44] "GET /auth/login?code=56079700b241467f8686ce5694f7ac1a HTTP/1.1" 200 -
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:55:51] "GET /auth/login?code=a63c8185369c4efd80e83db2e41e3a7d HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+a63c8185369c4efd80e83db2e41e3a7d
+ready to get access_token
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+1146 (42S02): Table 'auth.auth' doesn't exist
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 11:58:24] "GET /auth/login?code=ead7db04e5324b959baf44ce271412aa HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+ead7db04e5324b959baf44ce271412aa
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+1146 (42S02): Table 'auth.auth' doesn't exist
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+Traceback (most recent call last):
+  File "/data/agent/CyperOS_k/cyberos/auth/auth.py", line 2, in <module>
+    import mysql.connector
+ModuleNotFoundError: No module named 'mysql'
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 12:31:09] "GET /auth/login?code=f420e42217024c2980f469f284a9dac9 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Aug/2024 12:31:35] "GET /auth/login?code=f420e42217024c2980f469f284a9dac9 HTTP/1.1" 200 -
+127.0.0.1 - - [30/Aug/2024 12:32:24] "[33mGET /auth/ HTTP/1.1[0m" 404 -
+127.0.0.1 - - [30/Aug/2024 12:32:29] "GET /auth HTTP/1.1" 200 -
+127.0.0.1 - - [30/Aug/2024 12:32:34] "GET /auth/login?code=324b25d1c0ac4a3c96b0a77273fa12ba HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+[]
+f420e42217024c2980f469f284a9dac9
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+{'user_id': '522031910299', 'name': '陈启炜', 'exp': datetime.datetime(2024, 8, 30, 5, 31, 9, 294776)}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNDk5MjI2OSwianRpIjoiZmZmMWE5ZTMtNGNkNS00YmU3LWIyZDktYmFmNTE5ZTZlZjQ5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjoiNTIyMDMxOTEwMjk5IiwibmFtZSI6Ilx1OTY0OFx1NTQyZlx1NzA5YyIsImV4cCI6IkZyaSwgMzAgQXVnIDIwMjQgMDU6MzE6MDkgR01UIn0sIm5iZiI6MTcyNDk5MjI2OSwiY3NyZiI6IjE4MzA0NWExLWE4OTQtNGZjMi05OTNiLWQ1NjFkOTM3ODZhYiIsImV4cCI6MTcyNDk5MzE2OX0.Rq7gvHrad63EnXSIy57w8fd2At9CWBw86att9rsIxQk
+'module' object is not callable
+[]
+f420e42217024c2980f469f284a9dac9
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+Request access token failed
+auth:
+[]
+324b25d1c0ac4a3c96b0a77273fa12ba
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+{'user_id': '522031910299', 'name': '陈启炜', 'exp': datetime.datetime(2024, 8, 30, 5, 32, 34, 20935)}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNDk5MjM1NCwianRpIjoiZWNkYmVmMjgtMDU4Zi00ZmQ1LWE2ZjYtODU1MDU3ZjcwNjkwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjoiNTIyMDMxOTEwMjk5IiwibmFtZSI6Ilx1OTY0OFx1NTQyZlx1NzA5YyIsImV4cCI6IkZyaSwgMzAgQXVnIDIwMjQgMDU6MzI6MzQgR01UIn0sIm5iZiI6MTcyNDk5MjM1NCwiY3NyZiI6ImM4NjlmNjkxLTkxYzctNDk3ZC05MWFkLTUyYjhmNzUwMDhhYSIsImV4cCI6MTcyNDk5MzI1NH0.7yMLcKmJEeHrIWcsSqxW0S7KJbkFxQ9a6tagnOT7OHw
+'module' object is not callable
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+127.0.0.1 - - [30/Aug/2024 12:36:33] "GET /auth/login?code=8b0ac620a2b84a45a9516318c07d714f HTTP/1.1" 200 -
+ * Serving Flask app 'auth'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8090
+ * Running on http://172.17.20.26:8090
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+login:
+6b52e5c8231846c4bf9e6cf6d2134d29
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+{'user_id': '522031910299', 'name': '陈启炜', 'exp': datetime.datetime(2024, 8, 30, 5, 40, 16, 475644)}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNDk5MjgxNiwianRpIjoiNGVkOWQ5NDAtMjFjNS00YWU2LWFhOWQtMzFmODliNTM0OWE5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjoiNTIyMDMxOTEwMjk5IiwibmFtZSI6Ilx1OTY0OFx1NTQyZlx1NzA5YyIsImV4cCI6IkZyaSwgMzAgQXVnIDIwMjQgMDU6NDA6MTYgR01UIn0sIm5iZiI6MTcyNDk5MjgxNiwiY3NyZiI6ImQwZmVjNjU5LWExN2EtNDZjOC04ODg0LWIxZjk1MGRjNWQzNiIsImV4cCI6MTcyNDk5MzcxNn0.pNcgKuqHVwIFeanLznM3-pkiXdTQuHUw8A9ZLyyN5EM
+'module' object is not callable
+127.0.0.1 - - [30/Aug/2024 12:40:16] "GET /auth/login?code=6b52e5c8231846c4bf9e6cf6d2134d29 HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+login:
+351ba15fc0be4dbc93fe2af473004e6c
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+{'user_id': '522031910299', 'name': '陈启炜', 'exp': datetime.datetime(2024, 8, 30, 5, 41, 53, 665552)}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNDk5MjkxMywianRpIjoiNzU0YzU5YzUtYjMwZi00MjU3LWFiYzAtNjYzOTM3NTg2YmMyIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjoiNTIyMDMxOTEwMjk5IiwibmFtZSI6Ilx1OTY0OFx1NTQyZlx1NzA5YyIsImV4cCI6IkZyaSwgMzAgQXVnIDIwMjQgMDU6NDE6NTMgR01UIn0sIm5iZiI6MTcyNDk5MjkxMywiY3NyZiI6IjEwYWMwMjZkLTM1ZGQtNGI2Yi1iOGFmLThmZDY4Y2M0MzMxMSIsImV4cCI6MTcyNDk5MzgxM30.m6ZpcN_BRmdSGAU8LcuimTlxqrHGvUQpcZvadVYSBT8
+'module' object is not callable
+127.0.0.1 - - [30/Aug/2024 12:41:53] "GET /auth/login?code=351ba15fc0be4dbc93fe2af473004e6c HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+login:
+2b9d63cd2f6e46a19b070804d2a51155
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+{'user_id': '522031910299', 'name': '陈启炜', 'exp': datetime.datetime(2024, 8, 30, 5, 44, 52, 695676)}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNDk5MzA5MiwianRpIjoiN2Y0N2UwZGMtN2FlNS00ODAyLWE4Y2YtYzBkOGNhYjAxYmFmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjoiNTIyMDMxOTEwMjk5IiwibmFtZSI6Ilx1OTY0OFx1NTQyZlx1NzA5YyIsImV4cCI6IkZyaSwgMzAgQXVnIDIwMjQgMDU6NDQ6NTIgR01UIn0sIm5iZiI6MTcyNDk5MzA5MiwiY3NyZiI6Ijc1NTkyOTExLWZiOWQtNDM3YS1hZGM3LWM5MWJmOGNjMzRjNSIsImV4cCI6MTcyNDk5Mzk5Mn0.M8gHHziBY8A9kryUoxcHJ8UnPg-2PGPgtDTUpB_f2ys
+127.0.0.1 - - [30/Aug/2024 12:44:52] "GET /auth/login?code=2b9d63cd2f6e46a19b070804d2a51155 HTTP/1.1" 200 -
+ * Detected change in '/data/agent/CyperOS_k/cyberos/auth/auth.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 575-897-268
+login:
+ec76b29818a34b69917193ff0e95d460
+ready to get access_token
+redirect_uri:
+http://api.emagen.cn/auth/login
+245f0827f53aaaef12e52c79ea5232fe
+response:
+{'errno': 0, 'error': 'success', 'total': 0, 'entities': [{'id': '65B5D541-7D92-4852-93AD-62AB16CAF2C3', 'account': 'qiweic10', 'name': '陈启炜', 'kind': 'canvas.profile', 'code': '522031910299', 'userType': 'student', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'classNo': '电院2273', 'gender': 'male', 'email': '779490624@qq.com', 'timeZone': 0, 'mobile': '13123128852', 'identities': [{'kind': 'nicman.identity', 'isDefault': False, 'code': '2022353405', 'userType': 'freshman', 'userTypeName': '新生', 'organize': {'name': '教务处', 'id': '60200'}, 'topOrganize': {'name': '教务处', 'id': '60200'}, 'mgtOrganize': {'name': '教务处', 'id': '60200'}, 'status': '过期', 'expireDate': '2022-10-30', 'createDate': 1659492695, 'updateDate': 1659492695, 'gjm': '156', 'defaultOptional': False, 'admissionDate': '2022-08-02', 'trainLevel': '新生', 'graduateDate': '2022-10-30', 'topOrganizes': [{'name': '教务处', 'id': '60200'}]}, {'kind': 'nicman.identity', 'isDefault': True, 'code': '522031910299', 'userType': 'student', 'userTypeName': '学生', 'organize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'mgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'topMgtOrganize': {'name': '电子信息与电气工程学院', 'id': '03000'}, 'status': '正常', 'expireDate': '2026-06-30', 'createDate': 1659604564, 'updateDate': 1704340655, 'classNo': '电院2273', 'gjm': '156', 'defaultOptional': True, 'major': {'name': '软件工程', 'id': '0806050037'}, 'admissionDate': '2022-08-23', 'trainLevel': '本科生', 'graduateDate': '2026-06-30', 'topOrganizes': [{'name': '电子信息与电气工程学院', 'id': '03000'}], 'type': {'id': '111', 'name': '本科生(中国国籍)'}}], 'unionId': 'oGEgEwgAuU1kZtwGCbfREo1gRvr4', 'accountExpireDate': '2026-12-31'}]}
+{'user_id': '522031910299', 'name': '陈启炜', 'exp': datetime.datetime(2024, 8, 31, 5, 31, 2, 877522)}
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyNDk5NTg2MiwianRpIjoiZjk3NTgyM2MtZDRmMy00MjcyLWEwMjktODQzYWQ4MTJjNmY0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6eyJ1c2VyX2lkIjoiNTIyMDMxOTEwMjk5IiwibmFtZSI6Ilx1OTY0OFx1NTQyZlx1NzA5YyIsImV4cCI6IlNhdCwgMzEgQXVnIDIwMjQgMDU6MzE6MDIgR01UIn0sIm5iZiI6MTcyNDk5NTg2MiwiY3NyZiI6ImIyNTVmYmNhLTAzN2ItNDMzMy05MDBmLWExNzEwNDc1ZmE4ZCIsImV4cCI6MTcyNDk5Njc2Mn0.gp8IXtn_yvDwrz7HfjCwTPcUTVLXuksacAb3n5WlkZM
+127.0.0.1 - - [30/Aug/2024 13:31:02] "GET /auth/login?code=ec76b29818a34b69917193ff0e95d460 HTTP/1.1" 200 -

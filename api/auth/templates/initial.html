@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Sign In</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="window.location.href=loginRequestUrl;">Sign In with JAccount</button>
+    <script>
+        const msg = "{{ msg }}";
+        const loginRequestUrl = `https://jaccount.sjtu.edu.cn/oauth2/authorize?response_type=code&client_id=${msg}&redirect_uri=${encodeURIComponent(window.location.origin)}/auth/login`;    </script>
+</body>
+
+</html>
